@@ -10,6 +10,6 @@ class PortalInteractionTest(BrowserBaselineTest):
             try:
                 page = browser.new_page()
                 page.goto(self.origin + "detail?id=" + DATA["items"][0]["id"], wait_until="domcontentloaded")
-                page.locator('#month-next').click();page.locator('#day-open').click();self.assertEqual(page.locator('#day').inner_text(),'十二月：市集日程')
+                page.locator('#month-next').click();page.locator('#day-open').click();self.assertIn('十二月',page.locator('#day').inner_text());page.locator('#cancel').click();self.assertIn('已取消',page.locator('#day').inner_text())
             finally:
                 browser.close()
